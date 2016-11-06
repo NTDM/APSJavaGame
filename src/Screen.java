@@ -12,7 +12,7 @@ public class Screen extends JPanel{
 	public void paint(Graphics g){
 		//desenha a borda
 		g.setColor(Color.RED);
-		g.drawRect(24, 10, 851, 55);
+		g.drawRect(24, 10, 800, 55);
 	}
 }
 
