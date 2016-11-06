@@ -30,6 +30,22 @@ public class Animator {
 		}
 	}
 	
+	public void updateWithConstraint(long time, int start, int end){
+		if(this.running){
+			if(time - this.previousTime >= this.speed){
+				this.currentFrame++;
+				if(this.currentFrame > end) this.currentFrame = start;
+				try{
+					this.sprite = this.frames.get(this.currentFrame);
+				}catch(IndexOutOfBoundsException e){
+					this.currentFrame = start;
+					this.sprite = this.frames.get(this.currentFrame);
+				}
+				this.previousTime = time;
+			}
+		}
+	}
+	
 	public void play(){
 		this.running  = true;
 		this.currentFrame = 0;

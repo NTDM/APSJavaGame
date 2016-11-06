@@ -20,6 +20,17 @@ public class Avatar extends JPanel{
 	
 	//https://www.youtube.com/watch?v=sxBknKI2BfQ
 	//https://www.youtube.com/watch?v=zRi0vzQbuqY
+	/*
+	Direções:
+	0 : idle (parado);
+	1 : direita
+	2 : baixo
+	3 : esquerda
+	4 : cima
+	*/
+	//private int direction = 0; 
+	private int spriteRow = 0;
+	
 	
 	//Image dbImage;
 	//Graphics dbg;
@@ -30,7 +41,9 @@ public class Avatar extends JPanel{
  	vx = Deslocamento do boneco em x
  	vy = Deslocamento do boneco em y
 	 */
-	public int x = 0,y = 0, vx = 0, vy = 0;
+	private int x = 0,y = 0, vx = 0, vy = 0;
+	
+	
 	//image for render
 	
 	private TelaGamePlay tgp;
@@ -46,10 +59,11 @@ public class Avatar extends JPanel{
 		this.sprites = new ArrayList<BufferedImage>();
 		
 		SpriteSheet sprite = new SpriteSheet(this.img);
-		this.sprites.add( sprite.grabSprite(64*0, 64*2, 64, 64) );
-		this.sprites.add( sprite.grabSprite(64*1, 64*2, 64, 64) );
-		this.sprites.add( sprite.grabSprite(64*2, 64*2, 64, 64) );
-		this.sprites.add( sprite.grabSprite(64*3, 64*2, 64, 64) );
+		for(int y=0 ; y<4 ; y++){
+			for( int x=0 ; x<4 ; x++){
+				this.sprites.add( sprite.grabSprite( 64*x, 64*y, 64, 64 ) );
+			}
+		}
 		
 		this.animator = new Animator(this.sprites);
 		this.animator.setSpeed(100);
@@ -70,40 +84,49 @@ public class Avatar extends JPanel{
 	public void update(){
 		this.x += this.vx;
 		this.y += this.vy;
-		this.animator.update(System.currentTimeMillis());
+		//this.animator.update(System.currentTimeMillis());
+		this.animator.updateWithConstraint(System.currentTimeMillis(), this.spriteRow*4 , this.spriteRow*4+3);
 	}
 	
 	public void keyPressed(KeyEvent e){
 		//Através dos eventos dos teclados movimentaremos o personagem
 				int tecla = e.getKeyCode();
-				
-				//System.out.println("KEY PRESSED EVENT");
+				//this.animator.resume();
 				
 				if(tecla == KeyEvent.VK_LEFT){
 					this.vx = -1;
 					this.vy = 0;
+					//this.direction = tecla;
+					this.spriteRow = 1;
 				}
 				
 				if(tecla == KeyEvent.VK_RIGHT){
 					this.vx = 1;
 					this.vy = 0;
+					//this.direction = tecla;
+					this.spriteRow = 2;
 				}
 				
 				if(tecla == KeyEvent.VK_UP){
 					this.vy = -1;
 					this.vx = 0;
+					//this.direction = tecla;
+					this.spriteRow = 3;
 				}
 				
 				if(tecla == KeyEvent.VK_DOWN){
 					this.vy = 1;
 					this.vx = 0;
+					//this.direction = tecla;
+					this.spriteRow = 0;
 				}
+				
 	}
 	
 	public void keyReleased(KeyEvent e){
-		//Fará com que o boneco pare de se mexermos quando largarmos a tecla
-				this.vx = 0;
-				this.vy = 0;
+		this.vx = 0;
+		this.vy = 0;
+		//this.animator.pause();
 	}
 	
 }
