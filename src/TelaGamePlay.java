@@ -88,37 +88,12 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//Através dos eventos dos teclados movimentaremos o personagem
-		int tecla = e.getKeyCode();
-		
-		//System.out.println("KEY PRESSED EVENT");
-		
-		if(tecla == KeyEvent.VK_LEFT){
-			this.av.vx = -1;
-			this.av.vy = 0;
-		}
-		
-		if(tecla == KeyEvent.VK_RIGHT){
-			this.av.vx = 1;
-			this.av.vy = 0;
-		}
-		
-		if(tecla == KeyEvent.VK_UP){
-			this.av.vy = -1;
-			this.av.vx = 0;
-		}
-		
-		if(tecla == KeyEvent.VK_DOWN){
-			this.av.vy = 1;
-			this.av.vx = 0;
-		}
+		this.av.keyPressed(e);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		//Fará com que o boneco pare de se mexermos quando largarmos a tecla
-		this.av.vx = 0;
-		this.av.vy = 0;
+		this.av.keyReleased(e);
 	}
 
 	@Override
