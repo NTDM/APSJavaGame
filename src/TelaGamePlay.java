@@ -11,10 +11,13 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	//timer para controlarmos o delay da movimentaçao do personagem
 	//Timer tm = new Timer(5,this);
 	private Game game;
+	public Loader loader;
 	Avatar av;
 	
 	public TelaGamePlay(Game game){
 		this.game = game;
+		this.loader = new Loader();
+		
 		//Posicionamento e design do panel da Gameplay
 		this.setBounds( 25,75, 640,480);
 		this.setBackground(Color.BLACK);
