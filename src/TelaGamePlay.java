@@ -4,39 +4,66 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.Array;
+
 import javax.swing.*;
 
 public class TelaGamePlay extends GameLoop implements ActionListener, KeyListener{
 	
-	//timer para controlarmos o delay da movimentaçao do personagem
-	//Timer tm = new Timer(5,this);
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
+	
 	private Game game;
+	public Loader loader;
 	Avatar av;
+	
+	ParqueMapa mapa;
 	
 	public TelaGamePlay(Game game){
 		this.game = game;
+		this.loader = new Loader();
+		
 		//Posicionamento e design do panel da Gameplay
-		this.setBounds( 25,75, 640,480);
+		this.setBounds( 0,0, 640,512);
 		this.setBackground(Color.BLACK);
 		
-		//Inicio dos movimentos
-		//tm.start();
 		addKeyListener(this);
+		
 		//Ajustando o foco do boneco
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		
+		//Avatar
 		this.av = new Avatar(this);
-		
 		this.add(this.av);
+		
+		//Mapa
+		int m[] = { 
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 
+		};
+		
+		this.mapa = new ParqueMapa(TelaGamePlay.WIDTH, TelaGamePlay.HEIGHT, 64, m );
+		this.add(this.mapa);
 	}
 	
 	//desenha os objetos de jogo
 	public void paint(Graphics g){
 		super.paint(g);
 		
+		//Mapa
+		this.mapa.paint(g);
+		
 		//Avatar
-		this.av.paint(g);		
+		this.av.paint(g);	
+		
 	}
 	
 	//configura inicio do jogo
@@ -88,37 +115,12 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//Através dos eventos dos teclados movimentaremos o personagem
-		int tecla = e.getKeyCode();
-		
-		//System.out.println("KEY PRESSED EVENT");
-		
-		if(tecla == KeyEvent.VK_LEFT){
-			this.av.vx = -1;
-			this.av.vy = 0;
-		}
-		
-		if(tecla == KeyEvent.VK_RIGHT){
-			this.av.vx = 1;
-			this.av.vy = 0;
-		}
-		
-		if(tecla == KeyEvent.VK_UP){
-			this.av.vy = -1;
-			this.av.vx = 0;
-		}
-		
-		if(tecla == KeyEvent.VK_DOWN){
-			this.av.vy = 1;
-			this.av.vx = 0;
-		}
+		this.av.keyPressed(e);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		//Fará com que o boneco pare de se mexermos quando largarmos a tecla
-		this.av.vx = 0;
-		this.av.vy = 0;
+		this.av.keyReleased(e);
 	}
 
 	@Override
