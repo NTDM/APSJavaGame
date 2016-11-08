@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.Array;
+
 import javax.swing.*;
 
 public class TelaGamePlay extends GameLoop implements ActionListener, KeyListener{
@@ -15,32 +17,53 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	public Loader loader;
 	Avatar av;
 	
+	ParqueMapa mapa;
+	
 	public TelaGamePlay(Game game){
 		this.game = game;
 		this.loader = new Loader();
 		
 		//Posicionamento e design do panel da Gameplay
-		this.setBounds( 25,75, 640,480);
+		this.setBounds( 0,0, 640,512);
 		this.setBackground(Color.BLACK);
 		
-		//Inicio dos movimentos
-		//tm.start();
 		addKeyListener(this);
+		
 		//Ajustando o foco do boneco
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		
+		//Avatar
 		this.av = new Avatar(this);
-		
 		this.add(this.av);
+		
+		//Mapa
+		int m[] = { 
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
+				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 
+		};
+		
+		this.mapa = new ParqueMapa(TelaGamePlay.WIDTH, TelaGamePlay.HEIGHT, 64, m );
+		this.add(this.mapa);
 	}
 	
 	//desenha os objetos de jogo
 	public void paint(Graphics g){
 		super.paint(g);
 		
+		//Mapa
+		this.mapa.paint(g);
+		
 		//Avatar
-		this.av.paint(g);		
+		this.av.paint(g);	
+		
 	}
 	
 	//configura inicio do jogo
