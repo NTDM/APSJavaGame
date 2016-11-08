@@ -8,8 +8,9 @@ import javax.swing.*;
 
 public class TelaGamePlay extends GameLoop implements ActionListener, KeyListener{
 	
-	//timer para controlarmos o delay da movimentaçao do personagem
-	//Timer tm = new Timer(5,this);
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
+	
 	private Game game;
 	public Loader loader;
 	Avatar av;

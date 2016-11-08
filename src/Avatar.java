@@ -73,10 +73,6 @@ public class Avatar extends JPanel{
 	public void paint(Graphics g){
 		//desenhando o boneco
 		super.paint(g);
-		//g.setColor(Color.WHITE);
-		//g.fillRect(x, y, 50, 30);
-		
-		//g.drawImage(this.img, x, y, 64, 64, null);
 		
 		g.drawImage(this.animator.sprite, x, y, 64, 64, null);
 	}
@@ -84,6 +80,12 @@ public class Avatar extends JPanel{
 	public void update(){
 		this.x += this.vx;
 		this.y += this.vy;
+		if( this.x < 0) this.x = 0;
+		else if( this.x+64 > this.tgp.WIDTH ) this.x = this.tgp.WIDTH-64;
+		
+		if(this.y < 0)this.y = 0;
+		else if(this.y+64 > this.tgp.HEIGHT) this.y = this.tgp.HEIGHT-64;
+		
 		//this.animator.update(System.currentTimeMillis());
 		this.animator.updateWithConstraint(System.currentTimeMillis(), this.spriteRow*4 , this.spriteRow*4+3);
 	}
