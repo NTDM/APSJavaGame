@@ -11,7 +11,7 @@ import javax.swing.*;
 public class TelaGamePlay extends GameLoop implements ActionListener, KeyListener{
 	
 	public static final int WIDTH = 640;
-	public static final int HEIGHT = 480;
+	public static final int HEIGHT = 576;
 	
 	private Game game;
 	public Loader loader;
@@ -24,7 +24,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		this.loader = new Loader();
 		
 		//Posicionamento e design do panel da Gameplay
-		this.setBounds( 0,0, 640,512);
+		this.setBounds( 0,0, 640,576);
 		this.setBackground(Color.BLACK);
 		
 		addKeyListener(this);
@@ -38,16 +38,18 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		this.add(this.av);
 		
 		//Mapa
-		int m[] = { 
-				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
-				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
-				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
-				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
-				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
-				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
-				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
-				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
-				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 
+		
+		int[][] m = {
+				{0,1,2,0,1,2,0,1,2,0},
+				{1,0,2,0,1,2,0,1,2,0},
+				{0,1,2,0,1,2,0,1,2,0},
+				{0,1,2,0,1,2,0,1,2,0},
+				{0,1,2,0,1,2,0,1,2,0},
+				{0,1,2,0,1,2,0,1,2,0},
+				{0,1,2,0,1,2,0,1,2,0},
+				{0,1,2,0,1,2,0,1,2,0},
+				{0,1,2,0,1,2,0,1,2,0},
+				{0,1,2,0,1,2,0,1,2,0}
 		};
 		
 		this.mapa = new ParqueMapa(TelaGamePlay.WIDTH, TelaGamePlay.HEIGHT, 64, m );
