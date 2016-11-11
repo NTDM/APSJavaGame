@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,6 +17,9 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	private Game game;
 	public Loader loader;
 	Avatar av;
+	
+	//Array de lixos
+	Garbage[] lixo = new Garbage[10];
 	
 	ParqueMapa mapa;
 	
@@ -50,6 +54,23 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 				0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 
 		};
 		
+		//Criação dos lixos
+		lixo[0] = new Garbage(220,5);
+		lixo[1] = new Garbage(89,68);
+		lixo[2] = new Garbage(125,100);
+		lixo[3] = new Garbage(300,10);
+		lixo[4] = new Garbage(150,80);
+		lixo[5] = new Garbage(20,110);
+		lixo[6] = new Garbage(40,200);
+		lixo[7] = new Garbage(350,200);
+		lixo[8] = new Garbage(200,70);
+		lixo[9] = new Garbage(70,300);
+		
+		//adicionando lixos na Tela
+		for(int i=0;i<10;i++){
+			this.add(lixo[i]);
+		}
+		
 		this.mapa = new ParqueMapa(TelaGamePlay.WIDTH, TelaGamePlay.HEIGHT, 64, m );
 		this.add(this.mapa);
 	}
@@ -62,8 +83,12 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		this.mapa.paint(g);
 		
 		//Avatar
-		this.av.paint(g);	
-		
+		this.av.paint(g);
+	
+		//lixo
+		for(int i=0;i<10;i++){
+			this.lixo[i].paint(g);;
+		}
 	}
 	
 	//configura inicio do jogo
@@ -75,6 +100,11 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
     //atualiza os objetos de jogo
     public  void update(double delta){
     	this.av.update();
+    	
+    	//checará a cada update se haverá colisão
+    	for(int i=0;i<10;i++){
+			this.lixo[i].collision(av, lixo[i]);
+		}
     }
     
     //atualiza renderizaÃ§Ã£o
@@ -125,7 +155,5 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
-	
-	
 	
 }

@@ -20,9 +20,7 @@ public class Game extends JFrame{
 		this.setResizable(false);
 		this.setVisible(true);
 		
-		
 		this.add(tg1);
-		
 	}
 	
 	public static void main(String[] args) {

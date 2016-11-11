@@ -131,4 +131,11 @@ public class Avatar extends JPanel{
 		//this.animator.pause();
 	}
 	
+	//coordenadas x e y do avatar
+	public int cordX(){
+		return x;
+	}
+	public int cordY(){
+		return y;
+	}
 }
