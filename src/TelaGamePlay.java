@@ -21,6 +21,9 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	//Array de lixos
 	Garbage[] lixo = new Garbage[10];
 	
+	//desenhos
+	ScorePanel sp;
+	
 	ParqueMapa mapa;
 	
 	public TelaGamePlay(Game game){
@@ -66,6 +69,10 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		lixo[8] = new Garbage(200,70);
 		lixo[9] = new Garbage(70,300);
 		
+		//adicionando painel de score
+		this.sp = new ScorePanel();
+		this.add(this.sp);
+		
 		//adicionando lixos na Tela
 		for(int i=0;i<10;i++){
 			this.add(lixo[i]);
@@ -85,6 +92,10 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		//Avatar
 		this.av.paint(g);
 	
+		//painel de Score
+		this.sp.paint(g);
+		this.sp.ScoreText(g);
+		
 		//lixo
 		for(int i=0;i<10;i++){
 			this.lixo[i].paint(g);;
@@ -105,6 +116,12 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
     	for(int i=0;i<10;i++){
 			this.lixo[i].collision(av, lixo[i]);
 		}
+    	
+    	//Checa se todos os lixos Foram coletados
+    	if(Garbage.getScore() == 100){
+    		JOptionPane.showMessageDialog(null, "You Win!!!");
+    		Garbage.setScoreToZero();
+    	}
     }
     
     //atualiza renderização
