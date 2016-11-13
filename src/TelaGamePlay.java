@@ -1,12 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.Array;
-
 import javax.swing.*;
 
 public class TelaGamePlay extends GameLoop implements ActionListener, KeyListener{
@@ -21,15 +19,16 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	//Array de lixos
 	Garbage[] lixo = new Garbage[10];
 	
-	//desenhos
+	//painel do Score
 	ScorePanel sp;
 	
+	//Mapa do Parque
 	ParqueMapa mapa;
 	
 	public TelaGamePlay(Game game){
 		this.game = game;
 		this.loader = new Loader();
-		
+	
 		//Posicionamento e design do panel da Gameplay
 		this.setBounds( 0,0, 640,512);
 		this.setBackground(Color.BLACK);
@@ -69,14 +68,14 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		lixo[8] = new Garbage(200,70);
 		lixo[9] = new Garbage(70,300);
 		
-		//adicionando painel de score
-		this.sp = new ScorePanel();
-		this.add(this.sp);
-		
 		//adicionando lixos na Tela
 		for(int i=0;i<10;i++){
 			this.add(lixo[i]);
 		}
+		
+		//adicionando painel de score
+		this.sp = new ScorePanel();
+		this.add(this.sp);
 		
 		this.mapa = new ParqueMapa(TelaGamePlay.WIDTH, TelaGamePlay.HEIGHT, 64, m );
 		this.add(this.mapa);
@@ -95,7 +94,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		//painel de Score
 		this.sp.paint(g);
 		this.sp.ScoreText(g);
-		
+
 		//lixo
 		for(int i=0;i<10;i++){
 			this.lixo[i].paint(g);;
@@ -119,7 +118,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
     	
     	//Checa se todos os lixos Foram coletados
     	if(Garbage.getScore() == 100){
-    		JOptionPane.showMessageDialog(null, "You Win!!!");
+    		JOptionPane.showMessageDialog(null, "Fase 1 concluída!!!");
     		Garbage.setScoreToZero();
     	}
     }
@@ -128,7 +127,6 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
     public void draw(){
     	this.repaint();
     }
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -171,6 +169,5 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {}
-	
+	public void keyTyped(KeyEvent e) {}	
 }

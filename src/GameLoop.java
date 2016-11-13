@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 public abstract class GameLoop extends JPanel{
@@ -50,6 +52,7 @@ public abstract class GameLoop extends JPanel{
             }catch(Exception e) {} 
         }
         shutdown();
+        
     }
  
     public void stop()
