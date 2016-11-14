@@ -3,8 +3,8 @@
 import java.awt.image.BufferedImage;
 
 /*
- * Salva um sprite em um BufferedImage
- * */
+  Salva um sprite em um BufferedImage
+*/
 
 public class SpriteSheet {
 	

@@ -36,11 +36,11 @@ public class Avatar extends JPanel{
 	//Graphics dbg;
 	
 	/*
- 	x =  Posição do boneco em X
- 	y =  Posição do boneco em y
- 	vx = Deslocamento do boneco em x
- 	vy = Deslocamento do boneco em y
-	 */
+	 	x =  Posição do boneco em X
+	 	y =  Posição do boneco em y
+	 	vx = Deslocamento do boneco em x
+	 	vy = Deslocamento do boneco em y
+	*/
 	private int x = 0,y = 0, vx = 0, vy = 0;
 	
 	
@@ -73,7 +73,6 @@ public class Avatar extends JPanel{
 	public void paint(Graphics g){
 		//desenhando o boneco
 		super.paint(g);
-		
 		g.drawImage(this.animator.sprite, x, y, 64, 64, null);
 	}
 
@@ -131,4 +130,11 @@ public class Avatar extends JPanel{
 		//this.animator.pause();
 	}
 	
+	//coordenadas x e y do avatar
+	public int getX(){
+		return x;
+	}
+	public int getY(){
+		return y;
+	}
 }
