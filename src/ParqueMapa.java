@@ -25,15 +25,15 @@ public class ParqueMapa extends JPanel{
 	}
 	
 	private void setupMap(){
-		//int qtd_width = this.width / this.cellSize;
-		//int qtd_height = this.height / this.cellSize;
+		int qtd_width = this.width / this.cellSize;
+		int qtd_height = this.height / this.cellSize;
 		//int totalCells = this.map.length;
 		
 		int x = 0;
 		int y = 0;
 		
-		for(y=0 ; y<10 ; y++){
-			for(x=0 ; x<10 ; x++){
+		for(y=0 ; y<qtd_height ; y++){
+			for(x=0 ; x<qtd_width ; x++){
 				this.cells.add( new MapCell( x*this.cellSize, y*this.cellSize, this.cellSize, this.map[y][x]) );
 			}
 		}
