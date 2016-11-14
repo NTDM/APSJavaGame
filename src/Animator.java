@@ -64,9 +64,9 @@ public class Animator {
 		this.previousTime = 0;
 		this.frameAtPause = 0; 
 	}
+	
 	public void resume(){
 		this.currentFrame = this.frameAtPause;
 		this.running = true;
 	}
-	
 }

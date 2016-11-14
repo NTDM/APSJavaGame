@@ -19,6 +19,9 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	//Array de lixos
 	Garbage[] lixo = new Garbage[10];
 	
+	//lixo especial
+	Garbage lixoEspecial;
+	
 	//painel do Score
 	ScorePanel sp;
 	
@@ -73,6 +76,10 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 			this.add(lixo[i]);
 		}
 		
+		//adicionando lixo especial na tela(posição fixa)
+		this.lixoEspecial = new Garbage(300, 300);
+		this.add(this.lixoEspecial);
+		
 		//adicionando painel de score
 		this.sp = new ScorePanel();
 		this.add(this.sp);
@@ -99,6 +106,11 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		for(int i=0;i<10;i++){
 			this.lixo[i].paint(g);;
 		}
+		
+		//A partir de 15 segundos o lixo especial irá aparecer
+		if(TimerGameplay.tempo <= 15){
+    		this.lixoEspecial.paintSprecialGarbage(g);
+    	}
 	}
 	
 	//configura inicio do jogo
@@ -113,13 +125,21 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
     	
     	//checará a cada update se haverá colisão
     	for(int i=0;i<10;i++){
-			this.lixo[i].collision(av, lixo[i]);
+    		//se houver colisão entre Avatar e os lixos normais, serão acrescidos 10 pontos ao player
+			if(this.lixo[i].collision(av, lixo[i])){
+				Garbage.score += 10;
+			}
 		}
     	
     	//Checa se todos os lixos Foram coletados
     	if(Garbage.getScore() == 100){
     		JOptionPane.showMessageDialog(null, "Fase 1 concluída!!!");
     		Garbage.setScoreToZero();
+    	}
+    	
+    	//se houver colisão entre Avatar e o lixo especial, serão acrescidos 10 segundos a mais para o player
+    	if(lixoEspecial.collision(av, lixoEspecial)){
+    		TimerGameplay.tempo += 10; 
     	}
     }
     

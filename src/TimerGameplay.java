@@ -36,7 +36,6 @@ public class TimerGameplay extends JPanel{
 	        	else{
 	            	lbltimer.setText("Tempo: "+ --tempo);
 	            }
-	
 	        }
 		}, 1000, 1000);
 	}

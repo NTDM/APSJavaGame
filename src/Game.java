@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import javax.swing.*;
 
-
 public class Game extends JFrame{
 	
 	static final int WIDTH = 800;
@@ -10,7 +9,6 @@ public class Game extends JFrame{
 	//Panel do Timer
 	TimerGameplay tgp = new TimerGameplay();
 	TelaGamePlay tg1 = new TelaGamePlay(this);	
-	
 	
 	public Game(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,5 +32,4 @@ public class Game extends JFrame{
 	public void run(){
 		this.tg1.run();
 	}
-	
 }

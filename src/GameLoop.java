@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-
 import javax.swing.*;
 
 public abstract class GameLoop extends JPanel{
@@ -51,8 +50,7 @@ public abstract class GameLoop extends JPanel{
             	Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
             }catch(Exception e) {} 
         }
-        shutdown();
-        
+        shutdown();  
     }
  
     public void stop()
