@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class TelaGamePlay extends GameLoop implements ActionListener, KeyListener{
 	
-	public static final int WIDTH = 640;
+	public static final int WIDTH = 800;
 	public static final int HEIGHT = 576;
 	
 	private Game game;
@@ -33,7 +33,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		this.loader = new Loader();
 	
 		//Posicionamento e design do panel da Gameplay
-		this.setBounds( 0,0, 640,576);
+		this.setBounds( 0,0, 800,576);
 		this.setBackground(Color.BLACK);
 		
 		addKeyListener(this);
@@ -49,30 +49,30 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		//Mapa
 		
 		int[][] m = {
-				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 18 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 4 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 },
-				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 28, 21, 21, 21, 21 , 21 , 21 , 21 , 21 , 21 , 21 },
-				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 },
-				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 },
-				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 },
-				{0 , 16, 1 , 1 , 1 , 1 , 1 , 1 , 2 , 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 },
-				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 },
-				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 },
-				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 }
+				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 18, 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 4 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
+				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 28, 21, 21, 21, 21 , 21 , 21 , 21 , 21 , 21 , 21 , 21 , 21 , 21 , 21 , 21 },
+				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 },
+				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 },
+				{0 , 3 , 10, 10, 10, 10, 10, 10, 10, 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 },
+				{0 , 16, 1 , 1 , 1 , 1 , 1 , 1 , 2 , 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 },
+				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 },
+				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 },
+				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 27, 20, 20, 20, 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 , 20 }
 		};
 		
 
 		this.mapa = new ParqueMapa(TelaGamePlay.WIDTH, TelaGamePlay.HEIGHT, 32, m );
 
-		//Criação dos lixos
+		//Criaï¿½ï¿½o dos lixos
 		lixo[0] = new Garbage(220,5);
 		lixo[1] = new Garbage(89,68);
 		lixo[2] = new Garbage(125,100);
@@ -89,7 +89,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 			this.add(lixo[i]);
 		}
 		
-		//adicionando lixo especial na tela(posição fixa)
+		//adicionando lixo especial na tela(posiï¿½ï¿½o fixa)
 		this.lixoEspecial = new Garbage(300, 300);
 		this.add(this.lixoEspecial);
 		
@@ -119,7 +119,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 			this.lixo[i].paint(g);;
 		}
 		
-		//A partir de 15 segundos o lixo especial irá aparecer
+		//A partir de 15 segundos o lixo especial irï¿½ aparecer
 		if(TimerGameplay.tempo <= 15){
     		this.lixoEspecial.paintSprecialGarbage(g);
     	}
@@ -135,9 +135,9 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
     public  void update(double delta){
     	this.av.update();
     	
-    	//checará a cada update se haverá colisão
+    	//checarï¿½ a cada update se haverï¿½ colisï¿½o
     	for(int i=0;i<10;i++){
-    		//se houver colisão entre Avatar e os lixos normais, serão acrescidos 10 pontos ao player
+    		//se houver colisï¿½o entre Avatar e os lixos normais, serï¿½o acrescidos 10 pontos ao player
 			if(this.lixo[i].collision(av, lixo[i])){
 				Garbage.score += 10;
 			}
@@ -145,11 +145,11 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
     	
     	//Checa se todos os lixos Foram coletados
     	if(Garbage.getScore() == 100){
-    		JOptionPane.showMessageDialog(null, "Fase 1 concluída!!!");
+    		JOptionPane.showMessageDialog(null, "Fase 1 concluï¿½da!!!");
     		Garbage.setScoreToZero();
     	}
     	
-    	//se houver colisão entre Avatar e o lixo especial, serão acrescidos 10 segundos a mais para o player
+    	//se houver colisï¿½o entre Avatar e o lixo especial, serï¿½o acrescidos 10 segundos a mais para o player
     	if(lixoEspecial.collision(av, lixoEspecial)){
     		TimerGameplay.tempo += 10; 
     	}

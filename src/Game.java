@@ -4,10 +4,10 @@ import javax.swing.*;
 public class Game extends JFrame{
 	
 
-	static final int WIDTH = 640;
+	static final int WIDTH = 800;
 	static final int HEIGHT = 576;
 	  
-	TelaGamePlay tg1 = new TelaGamePlay(this);	
+	//TelaGamePlay tg1 = new TelaGamePlay(this);	
 
 	
 	//Panel do Timer
