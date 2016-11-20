@@ -1,30 +1,74 @@
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Garbage extends JPanel{
 	
 	private int x, y,height = 10, width = 10;
 	static int score = 0;
+	private BufferedImage sprite;
+	private boolean especial = false;
 	
 	public Garbage(int x, int y){
 		this.x = x;
 		this.y = y;
+		
+		Loader loader = new Loader();
+		BufferedImage temp = null;
+		
+		try{
+			temp = loader.loadImage("images/maptiles.png");
+		}catch(IOException ex){
+			System.out.println("Erro carregando Sprite Avatar");
+		}
+		
+		SpriteSheet ss = new SpriteSheet(temp);
+		this.sprite = ss.grabSprite( 32*26, 32*27, 32, 32 );
+		temp = null;
+		
 	}
+	
+	public Garbage(int x, int y, boolean s){
+		this.x = x;
+		this.y = y;
+		this.especial = s;
+		
+		Loader loader = new Loader();
+		BufferedImage temp = null;
+		
+		try{
+			temp = loader.loadImage("images/maptiles.png");
+		}catch(IOException ex){
+			System.out.println("Erro carregando Sprite Avatar");
+		}
+		
+		int xlixo = 26;
+		if(s){ xlixo = 28; }
+		System.out.println(x+" - "+y+" - "+xlixo);
+		
+		SpriteSheet ss = new SpriteSheet(temp);
+		this.sprite = ss.grabSprite( 32*28, 32*27, 32, 32 );
+		temp = null;
+		
+	}
+	
 	
 	public void paint(Graphics g){
 		super.paint(g);
-		g.setColor(Color.PINK);
-		g.fillRect(x, y, height, width);
+		//g.setColor(Color.PINK);
+		//g.fillRect(x, y, height, width);	
+		g.drawImage(this.sprite, x, y, 32, 32, null);
 	}
 	
 	//lixo especial
-	public void paintSprecialGarbage(Graphics g){
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, 10, 10);
-	}
+	//public void paintSprecialGarbage(Graphics g){
+	//	g.setColor(Color.BLUE);
+	//	g.fillRect(x, y, 10, 10);
+	//}
 	
-	//funçao de colisão
+	//funï¿½ao de colisï¿½o
 	public boolean collision(Avatar av,Garbage lixo){
 		boolean colission = false;
 		if(this.x > av.getX() && this.x < av.getX() + 64){
@@ -38,10 +82,10 @@ public class Garbage extends JPanel{
 	}
 	
 	/*
-	  Até agora não consegui destruir o objeto, então o trambique é:
+	  Atï¿½ agora nï¿½o consegui destruir o objeto, entï¿½o o trambique ï¿½:
 	    - Zerar a altura;
 	    - Zerar largura;
-	    - Setando posiçoes negativas para x e y do objeto lixo, dessa forma ele não ocupará mais espaço;
+	    - Setando posiï¿½oes negativas para x e y do objeto lixo, dessa forma ele nï¿½o ocuparï¿½ mais espaï¿½o;
 	 */
 	
 	public void anular(){
