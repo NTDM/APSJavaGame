@@ -7,7 +7,10 @@ public class Animator {
 	
 	private volatile boolean running = false;
 	private long previousTime, speed;
-	private int frameAtPause, currentFrame;
+	private int frameAtPause;
+	private int currentFrame;
+	
+	private int start, stop = 0;
 	
 	public Animator( ArrayList<BufferedImage> frames ){
 		this.frames = frames;
@@ -34,11 +37,13 @@ public class Animator {
 		if(this.running){
 			if(time - this.previousTime >= this.speed){
 				this.currentFrame++;
-				if(this.currentFrame > end) this.currentFrame = start;
+				if( this.currentFrame > this.stop || this.currentFrame < this.start){ 
+					this.currentFrame = this.start; 
+				}
 				try{
 					this.sprite = this.frames.get(this.currentFrame);
 				}catch(IndexOutOfBoundsException e){
-					this.currentFrame = start;
+					this.currentFrame = this.start;
 					this.sprite = this.frames.get(this.currentFrame);
 				}
 				this.previousTime = time;
@@ -69,4 +74,13 @@ public class Animator {
 		this.currentFrame = this.frameAtPause;
 		this.running = true;
 	}
+	
+	public void setStart(int s){ 
+		this.start = s; 
+	}
+	
+	public void setStop(int s){ 
+		this.stop = s; 
+	}
+	
 }
