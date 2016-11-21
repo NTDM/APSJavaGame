@@ -90,7 +90,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		}
 		
 		//adicionando lixo especial na tela(posi��o fixa)
-		this.lixoEspecial = new Garbage(300, 300);
+		this.lixoEspecial = new Garbage(300, 300, true);
 		this.add(this.lixoEspecial);
 		
 		//adicionando painel de score
@@ -121,7 +121,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		
 		//A partir de 15 segundos o lixo especial ir� aparecer
 		if(TimerGameplay.tempo <= 15){
-    		this.lixoEspecial.paintSprecialGarbage(g);
+    		this.lixoEspecial.paint(g);
     	}
 	}
 	
