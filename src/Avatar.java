@@ -28,9 +28,13 @@ public class Avatar extends JPanel{
 	3 : esquerda
 	4 : cima
 	*/
+	
+	private static boolean upKey, downKey, leftKey, rightKey, idle = false;
+	
 	//private int direction = 0; 
 	private int spriteRow = 0;
-	
+	private int startSpriteAnim = 0;
+	private int stopSpriteAnim = 0;
 	
 	//Image dbImage;
 	//Graphics dbg;
@@ -41,7 +45,7 @@ public class Avatar extends JPanel{
 	 	vx = Deslocamento do boneco em x
 	 	vy = Deslocamento do boneco em y
 	*/
-	private int x = 0,y = 0, vx = 0, vy = 0;
+	private static int x = 0,y = 0, vx = 0, vy = 0;
 	
 	
 	//image for render
@@ -59,14 +63,14 @@ public class Avatar extends JPanel{
 		this.sprites = new ArrayList<BufferedImage>();
 		
 		SpriteSheet sprite = new SpriteSheet(this.img);
-		for(int y=0 ; y<4 ; y++){
+		for(int y=0 ; y<8 ; y++){
 			for( int x=0 ; x<4 ; x++){
 				this.sprites.add( sprite.grabSprite( 64*x, 64*y, 64, 64 ) );
 			}
 		}
 		
 		this.animator = new Animator(this.sprites);
-		this.animator.setSpeed(100);
+		this.animator.setSpeed(75);
 		this.animator.play();
 	}
 	
@@ -77,57 +81,126 @@ public class Avatar extends JPanel{
 	}
 
 	public void update(){
-		this.x += this.vx;
-		this.y += this.vy;
-		if( this.x < 0) this.x = 0;
-		else if( this.x+64 > this.tgp.WIDTH ) this.x = this.tgp.WIDTH-64;
+		//System.out.println(this.upKey+" - "+this.downKey+" - "+this.leftKey+" - "+this.rightKey);
+		this.updateMovement();
 		
-		if(this.y < 0)this.y = 0;
-		else if(this.y+64 > this.tgp.HEIGHT) this.y = this.tgp.HEIGHT-64;
+		//System.out.println(this.spriteRow+" - "+this.startSpriteAnim+" - "+this.stopSpriteAnim);
 		
-		//this.animator.update(System.currentTimeMillis());
-		this.animator.updateWithConstraint(System.currentTimeMillis(), this.spriteRow*4 , this.spriteRow*4+3);
+		this.animator.updateWithConstraint(System.currentTimeMillis(), this.startSpriteAnim , this.stopSpriteAnim);
 	}
 	
 	public void keyPressed(KeyEvent e){
 		//AtravÃ©s dos eventos dos teclados movimentaremos o personagem
-				int tecla = e.getKeyCode();
-				//this.animator.resume();
-				
-				if(tecla == KeyEvent.VK_LEFT){
-					this.vx = -1;
-					this.vy = 0;
-					//this.direction = tecla;
-					this.spriteRow = 1;
-				}
-				
-				if(tecla == KeyEvent.VK_RIGHT){
-					this.vx = 1;
-					this.vy = 0;
-					//this.direction = tecla;
-					this.spriteRow = 2;
-				}
-				
-				if(tecla == KeyEvent.VK_UP){
-					this.vy = -1;
-					this.vx = 0;
-					//this.direction = tecla;
-					this.spriteRow = 3;
-				}
-				
-				if(tecla == KeyEvent.VK_DOWN){
-					this.vy = 1;
-					this.vx = 0;
-					//this.direction = tecla;
-					this.spriteRow = 0;
-				}
-				
+		int tecla = e.getKeyCode();
+		
+		if(TimerGameplay.tempo >= 1 && TelaGamePlay.telaConcluida == false){
+			if(tecla == KeyEvent.VK_LEFT){
+				this.leftKey = true;
+			}
+			if(tecla == KeyEvent.VK_RIGHT){
+				this.rightKey = true;
+			}
+			if(tecla == KeyEvent.VK_UP){
+				this.upKey = true;
+			}
+			if(tecla == KeyEvent.VK_DOWN){
+				this.downKey = true;
+			}	
+		} else if(TimerGameplay.tempo == 0){
+			JOptionPane.showMessageDialog(null, "Seu Tempo Acabou!!!\nFinal Score: " + ScorePanel.getScore(), "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Fechando o Jogo...");
+		} else if(TelaGamePlay.telaConcluida == true){
+			Avatar.noMotion();
+			JOptionPane.showMessageDialog(null, "Fase 1 concluída!!!\nFinal Score: " + ScorePanel.getScore(), "Parabéns", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 	public void keyReleased(KeyEvent e){
-		this.vx = 0;
-		this.vy = 0;
-		//this.animator.pause();
+		int tecla = e.getKeyCode();
+		
+		if(tecla == KeyEvent.VK_LEFT){
+			this.leftKey = false;
+		}
+		if(tecla == KeyEvent.VK_RIGHT){
+			this.rightKey = false;
+		}
+		if(tecla == KeyEvent.VK_UP){
+			this.upKey = false;
+		}
+		if(tecla == KeyEvent.VK_DOWN){
+			this.downKey = false;
+		}
+	}
+	
+	private void updateMovement(){
+		
+		if(this.upKey){
+			this.vy = -1;
+			//this.spriteRow = 3;
+		}
+		else if(this.downKey){
+			this.vy = 1;
+			//this.spriteRow = 0;
+		}
+		else{
+			this.vy = 0;
+		}
+		
+		if(this.leftKey){
+			this.vx = -1;
+			//this.spriteRow = 1;
+		}
+		else if(this.rightKey){
+			this.vx = 1;
+			//this.spriteRow = 2;
+		}
+		else{
+			this.vx = 0;
+		}
+		
+		if( this.upKey && this.leftKey ){
+			this.spriteRow = 6;
+		}
+		else if( this.upKey && this.rightKey ){
+			this.spriteRow = 7;
+		}
+		else if( this.downKey && this.leftKey ){
+			this.spriteRow = 5;
+		}
+		else if( this.downKey && this.rightKey ){
+			this.spriteRow = 4;
+		}
+		else if(this.upKey)		this.spriteRow = 3; 
+		else if(this.downKey)	this.spriteRow = 0;
+		else if(this.leftKey)	this.spriteRow = 1;
+		else if(this.rightKey)	this.spriteRow = 2;
+		
+		if( !this.upKey   && 
+			!this.downKey && 
+			!this.leftKey && 
+			!this.rightKey ){
+			this.startSpriteAnim = this.spriteRow*4;
+			this.stopSpriteAnim = this.spriteRow*4;
+			
+			this.animator.setStart(this.spriteRow*4);
+			this.animator.setStop(this.spriteRow*4);
+			}
+		else{
+			this.startSpriteAnim = this.spriteRow*4;
+			this.stopSpriteAnim = this.spriteRow*4+3;
+			
+			this.animator.setStart(this.spriteRow*4);
+			this.animator.setStop(this.spriteRow*4+3);
+		}
+		
+		this.x += this.vx;
+		this.y += this.vy;
+		if( this.x < 0) this.x = 0;
+		else if( this.x+64 > TelaGamePlay.WIDTH ) this.x = TelaGamePlay.WIDTH-64;
+		
+		if(this.y < 0)this.y = 0;
+		else if(this.y+64 > TelaGamePlay.HEIGHT) this.y = TelaGamePlay.HEIGHT-64;
+		
 	}
 	
 	//coordenadas x e y do avatar
@@ -136,5 +209,18 @@ public class Avatar extends JPanel{
 	}
 	public int getY(){
 		return y;
+	}
+	
+	public static void noMotion(){
+		upKey = false;
+		downKey = false;
+		leftKey = false;
+		rightKey = false;
+		idle = false;
+		
+		//vx = 0;
+		//vy = 0;
+		//y  = 0;
+		//x  = 0;
 	}
 }
