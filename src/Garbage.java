@@ -7,7 +7,10 @@ import java.io.IOException;
 public class Garbage extends JPanel{
 	
 	private int x, y,height = 10, width = 10;
+<<<<<<< HEAD
+=======
 	static int score = 0;
+>>>>>>> c1516bff6596a16ab28a02b04aa726b8350d9899
 	private BufferedImage sprite;
 	private boolean especial = false;
 	
@@ -91,14 +94,7 @@ public class Garbage extends JPanel{
 	public void anular(){
 		this.height = 0;
 		this.width = 0;
-		this.x = -1;
-		this.y= -1;
-	}
-	
-	public static int getScore(){
-		return score;
-	}
-	public static void setScoreToZero(){
-		score = 0;
+		this.x = -100;
+		this.y= -100;
 	}
 }

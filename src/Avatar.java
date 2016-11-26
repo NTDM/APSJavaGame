@@ -28,7 +28,12 @@ public class Avatar extends JPanel{
 	3 : esquerda
 	4 : cima
 	*/
+<<<<<<< HEAD
+	
+	private static boolean upKey, downKey, leftKey, rightKey, idle = false;
+=======
 	private boolean upKey, downKey, leftKey, rightKey, idle = false;
+>>>>>>> c1516bff6596a16ab28a02b04aa726b8350d9899
 	
 	//private int direction = 0; 
 	private int spriteRow = 0;
@@ -44,7 +49,7 @@ public class Avatar extends JPanel{
 	 	vx = Deslocamento do boneco em x
 	 	vy = Deslocamento do boneco em y
 	*/
-	private int x = 0,y = 0, vx = 0, vy = 0;
+	private static int x = 0,y = 0, vx = 0, vy = 0;
 	
 	
 	//image for render
@@ -91,6 +96,29 @@ public class Avatar extends JPanel{
 	public void keyPressed(KeyEvent e){
 		//Atrav√©s dos eventos dos teclados movimentaremos o personagem
 		int tecla = e.getKeyCode();
+<<<<<<< HEAD
+		
+		if(TimerGameplay.tempo >= 1 && TelaGamePlay.telaConcluida == false){
+			if(tecla == KeyEvent.VK_LEFT){
+				this.leftKey = true;
+			}
+			if(tecla == KeyEvent.VK_RIGHT){
+				this.rightKey = true;
+			}
+			if(tecla == KeyEvent.VK_UP){
+				this.upKey = true;
+			}
+			if(tecla == KeyEvent.VK_DOWN){
+				this.downKey = true;
+			}	
+		} else if(TimerGameplay.tempo == 0){
+			JOptionPane.showMessageDialog(null, "Seu Tempo Acabou!!!\nFinal Score: " + ScorePanel.getScore(), "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Fechando o Jogo...");
+		} else if(TelaGamePlay.telaConcluida == true){
+			Avatar.noMotion();
+			JOptionPane.showMessageDialog(null, "Fase 1 concluÌda!!!\nFinal Score: " + ScorePanel.getScore(), "ParabÈns", JOptionPane.INFORMATION_MESSAGE);
+		}
+=======
 				
 		if(tecla == KeyEvent.VK_LEFT){
 			this.leftKey = true;
@@ -104,6 +132,7 @@ public class Avatar extends JPanel{
 		if(tecla == KeyEvent.VK_DOWN){
 			this.downKey = true;
 		}				
+>>>>>>> c1516bff6596a16ab28a02b04aa726b8350d9899
 	}
 	
 	public void keyReleased(KeyEvent e){
@@ -200,5 +229,18 @@ public class Avatar extends JPanel{
 	}
 	public int getY(){
 		return y;
+	}
+	
+	public static void noMotion(){
+		upKey = false;
+		downKey = false;
+		leftKey = false;
+		rightKey = false;
+		idle = false;
+		
+		//vx = 0;
+		//vy = 0;
+		//y  = 0;
+		//x  = 0;
 	}
 }
