@@ -185,7 +185,16 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		this.av.keyPressed(e);
+		
+		if(TimerGameplay.tempo >= 1 && TelaGamePlay.telaConcluida == false){
+			this.av.keyPressed(e);	
+		} else if(TimerGameplay.tempo == 0){
+			JOptionPane.showMessageDialog(null, "Seu Tempo Acabou!!!\nFinal Score: " + ScorePanel.getScore(), "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Fechando o Jogo...");
+		} else if(TelaGamePlay.telaConcluida == true){
+			this.av.noMotion();
+			JOptionPane.showMessageDialog(null, "Fase 1 conclu�da!!!\nFinal Score: " + ScorePanel.getScore(), "Parab�ns", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	@Override

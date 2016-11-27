@@ -29,7 +29,7 @@ public class Avatar extends JPanel{
 	4 : cima
 	*/
 	
-	private static boolean upKey, downKey, leftKey, rightKey, idle = false;
+	private boolean upKey, downKey, leftKey, rightKey, idle = false;
 	
 	//private int direction = 0; 
 	private int spriteRow = 0;
@@ -80,6 +80,7 @@ public class Avatar extends JPanel{
 		g.drawImage(this.animator.sprite, x, y, 64, 64, null);
 	}
 
+	
 	public void update(){
 		//System.out.println(this.upKey+" - "+this.downKey+" - "+this.leftKey+" - "+this.rightKey);
 		this.updateMovement();
@@ -89,10 +90,33 @@ public class Avatar extends JPanel{
 		this.animator.updateWithConstraint(System.currentTimeMillis(), this.startSpriteAnim , this.stopSpriteAnim);
 	}
 	
+	public void noMotion(){
+		this.upKey = false;
+		this.downKey = false;
+		this.leftKey = false;
+		this.rightKey = false;
+		this.idle = false;
+		
+	}
+	
 	public void keyPressed(KeyEvent e){
 		//AtravÃ©s dos eventos dos teclados movimentaremos o personagem
 		int tecla = e.getKeyCode();
 		
+		if(tecla == KeyEvent.VK_LEFT){
+			this.leftKey = true;
+		}
+		if(tecla == KeyEvent.VK_RIGHT){
+			this.rightKey = true;
+		}
+		if(tecla == KeyEvent.VK_UP){
+			this.upKey = true;
+		}
+		if(tecla == KeyEvent.VK_DOWN){
+			this.downKey = true;
+		}	
+		
+		/*
 		if(TimerGameplay.tempo >= 1 && TelaGamePlay.telaConcluida == false){
 			if(tecla == KeyEvent.VK_LEFT){
 				this.leftKey = true;
@@ -111,8 +135,8 @@ public class Avatar extends JPanel{
     		JOptionPane.showMessageDialog(null, "Fechando o Jogo...");
 		} else if(TelaGamePlay.telaConcluida == true){
 			Avatar.noMotion();
-			JOptionPane.showMessageDialog(null, "Fase 1 concluída!!!\nFinal Score: " + ScorePanel.getScore(), "Parabéns", JOptionPane.INFORMATION_MESSAGE);
-		}
+			JOptionPane.showMessageDialog(null, "Fase 1 concluï¿½da!!!\nFinal Score: " + ScorePanel.getScore(), "Parabï¿½ns", JOptionPane.INFORMATION_MESSAGE);
+		}//*/
 
 	}
 	
@@ -211,17 +235,5 @@ public class Avatar extends JPanel{
 	public int getY(){
 		return y;
 	}
-	
-	public static void noMotion(){
-		upKey = false;
-		downKey = false;
-		leftKey = false;
-		rightKey = false;
-		idle = false;
-		
-		//vx = 0;
-		//vy = 0;
-		//y  = 0;
-		//x  = 0;
-	}
+
 }
