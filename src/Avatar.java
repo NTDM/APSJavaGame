@@ -28,12 +28,8 @@ public class Avatar extends JPanel{
 	3 : esquerda
 	4 : cima
 	*/
-<<<<<<< HEAD
 	
 	private static boolean upKey, downKey, leftKey, rightKey, idle = false;
-=======
-	private boolean upKey, downKey, leftKey, rightKey, idle = false;
->>>>>>> c1516bff6596a16ab28a02b04aa726b8350d9899
 	
 	//private int direction = 0; 
 	private int spriteRow = 0;
@@ -96,7 +92,6 @@ public class Avatar extends JPanel{
 	public void keyPressed(KeyEvent e){
 		//Atrav√©s dos eventos dos teclados movimentaremos o personagem
 		int tecla = e.getKeyCode();
-<<<<<<< HEAD
 		
 		if(TimerGameplay.tempo >= 1 && TelaGamePlay.telaConcluida == false){
 			if(tecla == KeyEvent.VK_LEFT){
@@ -118,21 +113,7 @@ public class Avatar extends JPanel{
 			Avatar.noMotion();
 			JOptionPane.showMessageDialog(null, "Fase 1 concluÌda!!!\nFinal Score: " + ScorePanel.getScore(), "ParabÈns", JOptionPane.INFORMATION_MESSAGE);
 		}
-=======
-				
-		if(tecla == KeyEvent.VK_LEFT){
-			this.leftKey = true;
-		}
-		if(tecla == KeyEvent.VK_RIGHT){
-			this.rightKey = true;
-		}
-		if(tecla == KeyEvent.VK_UP){
-			this.upKey = true;
-		}
-		if(tecla == KeyEvent.VK_DOWN){
-			this.downKey = true;
-		}				
->>>>>>> c1516bff6596a16ab28a02b04aa726b8350d9899
+
 	}
 	
 	public void keyReleased(KeyEvent e){

@@ -11,11 +11,9 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 576;
-<<<<<<< HEAD
 	
 	public static boolean telaConcluida = false;
-=======
->>>>>>> c1516bff6596a16ab28a02b04aa726b8350d9899
+
 	
 	private Game game;
 	public Loader loader;
@@ -38,11 +36,8 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		this.loader = new Loader();
 	
 		//Posicionamento e design do panel da Gameplay
-<<<<<<< HEAD
 		this.setBounds(0,0, 800,576);
-=======
-		this.setBounds( 0,0, 800,576);
->>>>>>> c1516bff6596a16ab28a02b04aa726b8350d9899
+
 		this.setBackground(Color.BLACK);
 		
 		addKeyListener(this);
@@ -153,16 +148,10 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		}
     	
     	//Checa se todos os lixos Foram coletados
-<<<<<<< HEAD
     	if(ScorePanel.getScore() == 100 && telaConcluida == false){
     		telaConcluida = true;
     		//JOptionPane.showMessageDialog(null, "Fase 1 conclu�da!!!");
     		//ScorePanel.setScoreToZero();
-=======
-    	if(Garbage.getScore() == 100){
-    		JOptionPane.showMessageDialog(null, "Fase 1 conclu�da!!!");
-    		Garbage.setScoreToZero();
->>>>>>> c1516bff6596a16ab28a02b04aa726b8350d9899
     	}
     	
     	//se houver colis�o entre Avatar e o lixo especial, ser�o acrescidos 10 segundos a mais para o player

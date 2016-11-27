@@ -7,10 +7,9 @@ import java.io.IOException;
 public class Garbage extends JPanel{
 	
 	private int x, y,height = 10, width = 10;
-<<<<<<< HEAD
-=======
+
 	static int score = 0;
->>>>>>> c1516bff6596a16ab28a02b04aa726b8350d9899
+
 	private BufferedImage sprite;
 	private boolean especial = false;
 	
