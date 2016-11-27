@@ -76,6 +76,7 @@ public class Garbage extends JPanel{
 		if(this.x > av.getX() && this.x < av.getX() + 64){
 			if(this.y > av.getY() && this.y < av.getY() + 64){
 				colission = true;
+				TelaGamePlay.grabGarbage.play();
 				this.anular();
 				lixo = null;
 			}

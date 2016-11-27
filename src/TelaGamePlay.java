@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.lang.reflect.Array;
 import javax.swing.*;
 
+
 public class TelaGamePlay extends GameLoop implements ActionListener, KeyListener{
 	
 	public static final int WIDTH = 800;
@@ -18,6 +19,11 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	private Game game;
 	public Loader loader;
 	Avatar av;
+	
+	Sound soundTrack;
+	public static Sound grabGarbage;
+	
+	
 	
 	//Array de lixos
 	Garbage[] lixo = new Garbage[10];
@@ -102,7 +108,13 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		this.add(this.sp);
 
 		this.add(this.mapa);
+		
+		this.grabGarbage = new Sound("/audio/getlixo.wav");
+		
+		
 	}
+	
+	
 	
 	//desenha os objetos de jogo
 	public void paint(Graphics g){
@@ -130,7 +142,10 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 	}
 	
 	//configura inicio do jogo
-	public void startup(){}
+	public void startup(){
+		this.soundTrack = new Sound("/audio/track3.wav");
+		this.soundTrack.loop();
+	}
 	
 	//encerra o jogo 
     public void shutdown(){}
@@ -166,34 +181,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
     }
 	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		/*/limites do campo e coordenadas
-		System.out.println("ACTION EVENT");
-		
-		if(this.av.x<0){
-			this.av.vx = 0;
-			this.av.x = 0;
-		}
-		
-		if(this.av.x> 800){
-			this.av.vx = 0;
-			this.av.x = 800;
-		}
-		
-		if(this.av.y<0){
-			this.av.vy = 0;
-			this.av.y = 0;
-		}
-		
-		if(this.av.y> 570){
-			this.av.vy = 0;
-			this.av.y = 570;
-		}
-		this.av.x = this.av.x + this.av.vx;
-		this.av.y = this.av.y + this.av.vy;
-		
-		//repaint();//*/
-	}//*/
+	public void actionPerformed(ActionEvent arg0) {	}//*/
 
 	@Override
 	public void keyPressed(KeyEvent e) {

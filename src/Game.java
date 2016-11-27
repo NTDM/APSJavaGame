@@ -29,6 +29,7 @@ public class Game extends JFrame{
 	
 	public static void main(String[] args) {
 		Game g01 = new Game();
+		g01.tg1.startup();
 		g01.run();
 		System.exit(0);
 	}

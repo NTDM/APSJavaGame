@@ -7,6 +7,13 @@ import javax.imageio.ImageIO;
 
 public class Loader {
 	public static HashMap<String, BufferedImage> images;
+	//public
+	
+	/*
+	 * AUDIOS:
+	 * CM139_Loop06
+	 * 
+	 * */
 	
 	Loader(){
 		if( Loader.images == null  ){
