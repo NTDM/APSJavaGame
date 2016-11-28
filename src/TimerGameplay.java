@@ -26,13 +26,13 @@ public class TimerGameplay extends JPanel{
 	        	if(ScorePanel.getScore() == 100){
 	        		timer.cancel();
 	        	}
-	        	//se o Tempo se esgotar, é game over!!!
+	        	//se o Tempo se esgotar, ï¿½ game over!!!
 	        	else if (tempo == 0){
 	    	        timer.cancel();
-            		Avatar.noMotion();
+            		//Avatar.noMotion();
             		//System.exit(0);
 	            }
-	        	//Senão, vai contando
+	        	//Senï¿½o, vai contando
 	        	else{
 	            	lbltimer.setText("Tempo: "+ --tempo);
 	            }

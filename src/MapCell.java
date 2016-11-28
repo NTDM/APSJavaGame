@@ -8,6 +8,34 @@ import java.util.HashMap;
 
 import javax.swing.JPanel;
 
+/*
+ * MapCell
+ * 
+ * Classe que define cada quadrante do mapa.
+ * 
+ * Possui um sprite de exibição do terreno
+ * As coordenadas x, y desse quadrante, bem como o tamanho.
+ * O valor category, é o que define o trecho da imagem a ser usada.
+ * 
+ * O tile principal do mapa, possui diversos terrenos, organizados em quadrantes de 32x32 pixels
+ * Exemplo:
+ * A - terreno principal: Areia : 0
+ *
+ * 		|		|
+ * 	A+8	|  A+1	| A+2 
+ * 		|		|
+ * ---------------------
+ * 		|		|
+ * 	A+7	|	A	| A+3
+ * 		|		|
+ * ---------------------
+ * 		|		|
+ *	A+6	|  A+5	| A+4
+ *		|		|
+ *
+ *	Um terreno 100% Areia o valor de category seria 0. Os valores de 1 à 8, são as fronteires entre a Areia e a Grama Fraca.
+ * 
+ * */
 
 public class MapCell extends JPanel{
 	
@@ -19,7 +47,7 @@ public class MapCell extends JPanel{
 	
 	private Color cor;
 	
-	/*	CELLS CODE
+	/*	Códigos para as células
 	 * 0 - TUDO AREIA
 	 * 10 - TUDO GRAMA FRACA
 	 * 20 - TUDO GRAMA FORTE
@@ -31,11 +59,6 @@ public class MapCell extends JPanel{
 		this.y = y;
 		this.side = l;
 		this.category = cat;
-		
-		//if(cat == 0) this.cor = Color.RED;
-		//else if(cat == 1) this.cor = Color.GREEN;
-		//else if(cat == 2) this.cor = Color.BLUE;
-		//else this.cor = Color.BLACK;
 		
 		int[] sprite_coord = this.getSpritePos(cat);
 		
@@ -53,10 +76,9 @@ public class MapCell extends JPanel{
 		temp = null;
 	}
 	
+	// transforama o valor de categoria em um par de coordenadas
 	private int[] getSpritePos(int pos){
 		int[] c = new int[2];
-		
-		//System.out.println("Get Sprite Coord: "+pos);
 		
 		switch(pos){
 		case 0:
