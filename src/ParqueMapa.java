@@ -3,6 +3,21 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
+/*
+ * Parque Mapa
+ * 
+ * Organiza o mapa usado como plano de fundo para o jogo.
+ * 
+ * O cenário de fundo é dividido em quadrantes, aqui chamados de "cells".
+ * Cada cell é uma instancia de MapCell.
+ * 
+ * Esta classe recebe a largura e latura desejada para o mapa, uma medida para os quadrantes, 
+ * e um array que diz qual deve ser o trecho do tile a ser usado. 
+ * 
+ * Aqui também está a função de renderização do mapa, e suas celulas.
+ * 
+ * */
+
 public class ParqueMapa extends JPanel{
 	
 	private int width, height;

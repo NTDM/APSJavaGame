@@ -64,12 +64,6 @@ public class Garbage extends JPanel{
 		g.drawImage(this.sprite, x, y, 32, 32, null);
 	}
 	
-	//lixo especial
-	//public void paintSprecialGarbage(Graphics g){
-	//	g.setColor(Color.BLUE);
-	//	g.fillRect(x, y, 10, 10);
-	//}
-	
 	//fun�ao de colis�o
 	public boolean collision(Avatar av,Garbage lixo){
 		boolean colission = false;
@@ -84,12 +78,6 @@ public class Garbage extends JPanel{
 		return colission;
 	}
 	
-	/*
-	  At� agora n�o consegui destruir o objeto, ent�o o trambique �:
-	    - Zerar a altura;
-	    - Zerar largura;
-	    - Setando posi�oes negativas para x e y do objeto lixo, dessa forma ele n�o ocupar� mais espa�o;
-	 */
 	
 	public void anular(){
 		this.height = 0;

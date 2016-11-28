@@ -12,32 +12,30 @@ import java.io.IOException;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/*
+ * Classe Avatar
+ * Representa o Personagem controlado pelo jogador.
+ * 
+ * 
+ * */
 public class Avatar extends JPanel{
 	
+	//Imagem base para retirar os quadros na animação do personagem
 	private BufferedImage img;
+	
+	//Arraylist de imagens isoladas para as animações
 	private ArrayList<BufferedImage> sprites;
+	
+	//Objeto que anima imagens alocadas no ArrayList sprites
 	private Animator animator;
 	
-	//https://www.youtube.com/watch?v=sxBknKI2BfQ
-	//https://www.youtube.com/watch?v=zRi0vzQbuqY
-	/*
-	Direções:
-	0 : idle (parado);
-	1 : direita
-	2 : baixo
-	3 : esquerda
-	4 : cima
-	*/
-	
+	//Estados so avatar
 	private boolean upKey, downKey, leftKey, rightKey, idle = false;
 	
-	//private int direction = 0; 
+	//Informações para organizar as animações
 	private int spriteRow = 0;
 	private int startSpriteAnim = 0;
 	private int stopSpriteAnim = 0;
-	
-	//Image dbImage;
-	//Graphics dbg;
 	
 	/*
 	 	x =  Posição do boneco em X
@@ -48,12 +46,15 @@ public class Avatar extends JPanel{
 	private static int x = 0,y = 0, vx = 0, vy = 0;
 	
 	
-	//image for render
-	
+	//Referência para o objeto "pai" do Avatar
 	private TelaGamePlay tgp;
 	
+	//Construtor
 	public Avatar(TelaGamePlay t){
 		this.tgp = t;
+		
+		//Montando os Sprites
+		// Carregando a imagem base
 		try{
 			this.img = this.tgp.loader.loadImage("images/sprite_5.png");
 		}catch(IOException ex){
@@ -62,6 +63,7 @@ public class Avatar extends JPanel{
 		
 		this.sprites = new ArrayList<BufferedImage>();
 		
+		//Isolando os sprites
 		SpriteSheet sprite = new SpriteSheet(this.img);
 		for(int y=0 ; y<8 ; y++){
 			for( int x=0 ; x<4 ; x++){
@@ -69,6 +71,7 @@ public class Avatar extends JPanel{
 			}
 		}
 		
+		//Instanciando/configurando o Animator
 		this.animator = new Animator(this.sprites);
 		this.animator.setSpeed(75);
 		this.animator.play();
@@ -82,14 +85,15 @@ public class Avatar extends JPanel{
 
 	
 	public void update(){
-		//System.out.println(this.upKey+" - "+this.downKey+" - "+this.leftKey+" - "+this.rightKey);
+		//Atualiza o avatar
 		this.updateMovement();
 		
-		//System.out.println(this.spriteRow+" - "+this.startSpriteAnim+" - "+this.stopSpriteAnim);
-		
+		//Atualiza o quadro da animação do Avatar
 		this.animator.updateWithConstraint(System.currentTimeMillis(), this.startSpriteAnim , this.stopSpriteAnim);
 	}
 	
+	//bloqueia a movimentação do Avatar
+	//	Chamado quando o jogo termina 
 	public void noMotion(){
 		this.upKey = false;
 		this.downKey = false;
@@ -100,7 +104,7 @@ public class Avatar extends JPanel{
 	}
 	
 	public void keyPressed(KeyEvent e){
-		//Através dos eventos dos teclados movimentaremos o personagem
+		//Através dos eventos dos teclados alteramos os estados possíveis do Avatar
 		int tecla = e.getKeyCode();
 		
 		if(tecla == KeyEvent.VK_LEFT){
@@ -115,29 +119,6 @@ public class Avatar extends JPanel{
 		if(tecla == KeyEvent.VK_DOWN){
 			this.downKey = true;
 		}	
-		
-		/*
-		if(TimerGameplay.tempo >= 1 && TelaGamePlay.telaConcluida == false){
-			if(tecla == KeyEvent.VK_LEFT){
-				this.leftKey = true;
-			}
-			if(tecla == KeyEvent.VK_RIGHT){
-				this.rightKey = true;
-			}
-			if(tecla == KeyEvent.VK_UP){
-				this.upKey = true;
-			}
-			if(tecla == KeyEvent.VK_DOWN){
-				this.downKey = true;
-			}	
-		} else if(TimerGameplay.tempo == 0){
-			JOptionPane.showMessageDialog(null, "Seu Tempo Acabou!!!\nFinal Score: " + ScorePanel.getScore(), "Fim de Jogo", JOptionPane.INFORMATION_MESSAGE);
-    		JOptionPane.showMessageDialog(null, "Fechando o Jogo...");
-		} else if(TelaGamePlay.telaConcluida == true){
-			Avatar.noMotion();
-			JOptionPane.showMessageDialog(null, "Fase 1 conclu�da!!!\nFinal Score: " + ScorePanel.getScore(), "Parab�ns", JOptionPane.INFORMATION_MESSAGE);
-		}//*/
-
 	}
 	
 	public void keyReleased(KeyEvent e){
@@ -158,14 +139,13 @@ public class Avatar extends JPanel{
 	}
 	
 	private void updateMovement(){
-		
+		//A cada estado do Avatar mudamos:
+		// 1 - os valores do deslocamento
 		if(this.upKey){
 			this.vy = -1;
-			//this.spriteRow = 3;
 		}
 		else if(this.downKey){
 			this.vy = 1;
-			//this.spriteRow = 0;
 		}
 		else{
 			this.vy = 0;
@@ -173,16 +153,15 @@ public class Avatar extends JPanel{
 		
 		if(this.leftKey){
 			this.vx = -1;
-			//this.spriteRow = 1;
 		}
 		else if(this.rightKey){
 			this.vx = 1;
-			//this.spriteRow = 2;
 		}
 		else{
 			this.vx = 0;
 		}
 		
+		// 2 - A "linha" da sequencia de imagens que faz a animação, de acordo com o a direçnao do deslocamento do Avatar
 		if( this.upKey && this.leftKey ){
 			this.spriteRow = 6;
 		}
@@ -200,6 +179,7 @@ public class Avatar extends JPanel{
 		else if(this.leftKey)	this.spriteRow = 1;
 		else if(this.rightKey)	this.spriteRow = 2;
 		
+		// 3 - Atualização das informações para o Animator
 		if( !this.upKey   && 
 			!this.downKey && 
 			!this.leftKey && 
@@ -218,8 +198,11 @@ public class Avatar extends JPanel{
 			this.animator.setStop(this.spriteRow*4+3);
 		}
 		
+		// 4 - Atualização da posição do Avatar 
 		this.x += this.vx;
 		this.y += this.vy;
+		
+		// 5 - Limites de deslocamento do Avatar 
 		if( this.x < 0) this.x = 0;
 		else if( this.x+64 > TelaGamePlay.WIDTH ) this.x = TelaGamePlay.WIDTH-64;
 		

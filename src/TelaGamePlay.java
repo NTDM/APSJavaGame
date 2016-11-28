@@ -9,7 +9,27 @@ import javax.swing.*;
 
 /*	TelaGamePlay
  * 
- * Classe com o principal tarefa do aplicativo: coordenar elementos de jogo, regras e pontuação.
+ * Tarefas:
+ *  - coordenar elementos de jogo, regras e pontuação.
+ *  - Captura de eventos
+ *  - Atualização dos objetos
+ *  - Renderização
+ *   
+ * 
+ * É uma subclasse de Gameloop. Logo a atualização dos quadros é feita de maneira organizada.
+ * Durante sua construção, os objetos de jogo são instanciados.
+ *  
+ * Essa classe instancia os objetos de jogos, e outros acessórios importantes.
+ * Objetos de jogo:
+ * 	- Avatar
+ *  - ParqueMapa
+ *  _ Garbage
+ *  
+ *  Acessórios:
+ *  - Loader
+ *  - Sound
+ * 
+ * 
  * 
  * */
 public class TelaGamePlay extends GameLoop implements ActionListener, KeyListener{
@@ -60,8 +80,7 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
 		this.av = new Avatar(this);
 		this.add(this.av);
 		
-		//Mapa
-		
+		//Mapa do jogo
 		int[][] m = {
 				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
 				{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 , 10 },
@@ -184,12 +203,18 @@ public class TelaGamePlay extends GameLoop implements ActionListener, KeyListene
     	this.repaint();
     }
 	
+    /*
+     * CAPTURA DE EVENTOS
+     * */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {	}//*/
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
+		//Avalia se a partida ainda está rodando:
+		// Caso postivo: envia o evento para o Avatar
+		// Caso negativo: bloqueia o jogo com alertas.
 		if(TimerGameplay.tempo >= 1 && TelaGamePlay.telaConcluida == false){
 			this.av.keyPressed(e);	
 		} else if(TimerGameplay.tempo == 0){
