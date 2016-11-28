@@ -7,7 +7,11 @@ import java.awt.event.KeyListener;
 import java.lang.reflect.Array;
 import javax.swing.*;
 
-
+/*	TelaGamePlay
+ * 
+ * Classe com o principal tarefa do aplicativo: coordenar elementos de jogo, regras e pontuação.
+ * 
+ * */
 public class TelaGamePlay extends GameLoop implements ActionListener, KeyListener{
 	
 	public static final int WIDTH = 800;
